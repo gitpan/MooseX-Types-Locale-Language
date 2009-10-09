@@ -1,0 +1,49 @@
+=head1 NAME
+
+MooseX-Types-Locale-Language
+
+=head1 INSTALLATION
+
+To install this distribution,
+
+first, to make Makefile, build this distribution and run tests
+by the following command:
+
+    cpan -t .
+
+next, to deploy this distribution
+by the following command:
+
+    cpan -i .
+
+=head1 DEPENDENCIES
+
+See C<Makefile.PL>.
+
+=head1 DESCRIPTION
+
+This is L<Locale::Language> related constraints and coercions for L<Moose>.
+
+See further document of this distribution by the following commands:
+
+    perldoc MooseX::Types::Locale::Language
+
+=head1 AUTHOR
+
+=over 4
+
+=item MORIYA Masaki ("Gardejo")
+
+C<< <moriya at ermitejo dot com> >>,
+L<http://ttt.ermitejo.com/>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright (c) 2009 by MORIYA Masaki ("Gardejo"),
+L<http://ttt.ermitejo.com>.
+
+This library is free software;
+you can redistribute it and/or modify it under the same terms as Perl itself.
+See L<perlgpl> and L<perlartistic>.
