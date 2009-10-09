@@ -29,7 +29,7 @@ use namespace::clean;
 # public class variable(s)
 # ****************************************************************
 
-our $VERSION = "0.000";
+our $VERSION = "0.001";
 
 
 # ****************************************************************
@@ -105,6 +105,8 @@ __END__
 # POD
 # ****************************************************************
 
+=pod
+
 =head1 NAME
 
 MooseX::Types::Locale::Language - Locale::Language related constraints and coercions for Moose
@@ -142,7 +144,6 @@ MooseX::Types::Locale::Language - Locale::Language related constraints and coerc
     print $foo->code;   # 'ja'
     print $foo->name;   # 'Japanese'
 
-
 =head1 DESCRIPTION
 
 This module packages several L<Moose::Util::TypeConstraints> with coercions,
@@ -175,6 +176,56 @@ For example, C<'JAPANESE'> will convert to C<'Japanese'>.
 =item * L<MooseX::Types::Locale::Language::Fast>
 
 =item * L<MooseX::Types::Locale::Country>
+
+=back
+
+=head1 INCOMPATIBILITIES
+
+None reported.
+
+=head1 BUGS AND LIMITATIONS
+
+No bugs have been reported.
+
+=head2 Making suggestions and reporting bugs
+
+Please report any found bugs, feature requests, and ideas for improvements
+to C<bug-moosex-types-locale-language at rt.cpan.org>,
+or through the web interface
+at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooseX-Types-Locale-Language>.
+I will be notified, and then you'll automatically be notified of progress
+on your bugs/requests as I make changes.
+
+When reporting bugs, if possible,
+please add as small a sample as you can make of the code
+that produces the bug.
+And of course, suggestions and patches are welcome.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the C<perldoc> command.
+
+    perldoc MooseX::Types::Locale::Language
+
+You can also look for information at:
+
+=over 4
+
+=item RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MooseX-Types-Locale-Language>
+
+=item AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/MooseX-Types-Locale-Language>
+
+=item Search CPAN
+
+L<http://search.cpan.org/dist/MooseX-Types-Locale-Language>
+
+=item CPAN Ratings
+
+L<http://cpanratings.perl.org/d/MooseX-Types-Locale-Language>
 
 =back
 
