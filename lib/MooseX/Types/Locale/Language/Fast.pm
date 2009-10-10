@@ -2,7 +2,7 @@ package MooseX::Types::Locale::Language::Fast;
 
 
 # ****************************************************************
-# general dependence(-ies)
+# general dependency(-ies)
 # ****************************************************************
 
 use 5.008_001;
@@ -29,7 +29,7 @@ use namespace::clean;
 # public class variable(s)
 # ****************************************************************
 
-our $VERSION = "0.001";
+our $VERSION = "0.002";
 
 
 # ****************************************************************
@@ -87,7 +87,7 @@ MooseX::Types::Locale::Language::Fast - Locale::Language related constraints for
         package Foo;
 
         use Moose;
-        use MooseX::Types::Locale qw(
+        use MooseX::Types::Locale::Language qw(
             LanguageCode
             LanguageName
         );

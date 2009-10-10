@@ -2,6 +2,7 @@
 Changes
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
+inc/Module/Install/AuthorTests.pm
 inc/Module/Install/AutoInstall.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
@@ -35,3 +36,11 @@ t/10_fast.t
 t/lib/Test/MooseX/Types/Locale/Language.pm
 t/lib/Test/MooseX/Types/Locale/Language/Base.pm
 t/lib/Test/MooseX/Types/Locale/Language/Fast.pm
+xt/meta.t
+xt/no_tabs.t
+xt/perlcritic.t
+xt/perlcriticrc
+xt/pod.t
+xt/pod_coverage.t
+xt/synopsis.t
+xt/use_all_modules.t
