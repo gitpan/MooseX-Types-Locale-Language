@@ -1,5 +1,10 @@
 .gitignore
 Changes
+coverage.bat
+coverage.sh
+examples/alpha2.pl
+examples/complex.pl
+examples/name.pl
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
 inc/Module/Install/AuthorTests.pm

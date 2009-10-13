@@ -22,6 +22,7 @@ module_name: MooseX::Types::Locale::Language
 name: MooseX-Types-Locale-Language
 no_index:
   directory:
+    - examples
     - inc
     - t
     - xt
@@ -37,4 +38,4 @@ resources:
   homepage: http://github.com/gardejo/p5-moosex-types-locale-language
   license: http://dev.perl.org/licenses/
   repository: git://github.com/gardejo/p5-moosex-types-locale-language.git
-version: 0.002
+version: 0.003
