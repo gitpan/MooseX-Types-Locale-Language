@@ -28,7 +28,7 @@ no_index:
     - xt
 requires:
   Filter::Util::Call: 0
-  Locale::Language: 0
+  Locale::Language: 3.00
   Moose: 0.41
   MooseX::Types: 0.19
   namespace::clean: 0.08
@@ -38,4 +38,4 @@ resources:
   homepage: http://github.com/gardejo/p5-moosex-types-locale-language
   license: http://dev.perl.org/licenses/
   repository: git://github.com/gardejo/p5-moosex-types-locale-language.git
-version: 0.02
+version: 0.03
