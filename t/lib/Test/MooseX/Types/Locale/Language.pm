@@ -67,7 +67,7 @@ use Test::More;
 sub test_use : Tests(1) {
     my $self = shift;
 
-    use_ok 'Test::MooseX::Types::Locale::Language';
+    use_ok 'MooseX::Types::Locale::Language';
 
     return;
 }
@@ -121,17 +121,18 @@ Test::MooseX::Types::Locale::Language - Testing subclass for MooseX::Types::Loca
 
 =head1 DESCRIPTION
 
-This module tests L<MooseX::Types::Locale::Language>.
+This module tests
+L<MooseX::Types::Locale::Language|MooseX::Types::Locale::Language>.
 
 =head1 SEE ALSO
 
 =over 4
 
-=item * L<MooseX::Types::Locale::Language>
+=item * L<MooseX::Types::Locale::Language|MooseX::Types::Locale::Language>
 
-=item * L<Test::MooseX::Types::Locale::Language::Base>
+=item * L<Test::MooseX::Types::Locale::Language::Base|Test::MooseX::Types::Locale::Language::Base>
 
-=item * L<Test::MooseX::Types::Locale::Language::Fast>
+=item * L<Test::MooseX::Types::Locale::Language::Fast|Test::MooseX::Types::Locale::Language::Fast>
 
 =back
 
@@ -139,20 +140,23 @@ This module tests L<MooseX::Types::Locale::Language>.
 
 =over 4
 
-=item MORIYA Masaki ("Gardejo")
+=item MORIYA Masaki (a.k.a. Gardejo)
 
-C<< <moriya at ermitejo dot com> >>,
+C<< <moriya at cpan dot org> >>,
 L<http://ttt.ermitejo.com/>
 
 =back
 
-=head1 LICENSE AND COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2009 by MORIYA Masaki ("Gardejo"),
-L<http://ttt.ermitejo.com>.
+Copyright (c) 2009 by MORIYA Masaki (a.k.a. Gardejo),
+L<http://ttt.ermitejo.com/>.
 
 This library is free software;
 you can redistribute it and/or modify it under the same terms as Perl itself.
-See L<perlgpl> and L<perlartistic>.
+See L<perlgpl|perlgpl> and L<perlartistic|perlartistic>.
+
+The full text of the license can be found in the F<LICENSE> file
+included with this distribution.
 
 =cut

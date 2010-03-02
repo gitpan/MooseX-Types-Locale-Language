@@ -7,7 +7,7 @@ package MooseX::Types::Locale::Language;
 
 use 5.008_001;
 # MooseX::Types turns strict/warnings pragmas on,
-# however, kwalitee can not detect such mechanism.
+# however, kwalitee scorer can not detect such mechanism.
 # (Perl::Critic can it, with equivalent_modules parameter)
 use strict;
 use warnings;
@@ -39,7 +39,7 @@ use namespace::clean;
 # public class variable(s)
 # ****************************************************************
 
-our $VERSION = "0.003";
+our $VERSION = "0.02";
 
 
 # ****************************************************************
@@ -75,8 +75,10 @@ foreach my $subtype (LanguageCode, Alpha2Language) {
                 exists $alpha2{$_};
             },
             message {
-                "Validation failed for code failed with value ($_) because: " .
-                "Specified language code does not exist in ISO 639-1";
+                sprintf 'Validation failed for code failed with value (%s) '
+                       .'because specified language code does not exist '
+                       . 'in ISO 639-1',
+                    defined $_ ? $_ : q{};
             };
 
     coerce $subtype,
@@ -98,9 +100,10 @@ foreach my $subtype (LanguageCode, Alpha2Language) {
 #                 exists $bibliographic{$_};
 #             },
 #             message {
-#                 "Validation failed for code failed with value ($_) because: " .
-#                 "Specified language code does not exist in ISO 639-2 " .
-#                 "(bibliographic)";
+#                 sprintf 'Validation failed for code failed with value (%s) '
+#                       . 'because specified language code does not exist '
+#                       . 'in ISO 639-2 (bibliographic)',
+#                     defined $_ ? $_ : q{};
 #             };
 # 
 #     coerce $subtype,
@@ -120,9 +123,10 @@ foreach my $subtype (LanguageCode, Alpha2Language) {
 #             exists $terminology{$_};
 #         },
 #         message {
-#             "Validation failed for code failed with value ($_) because: " .
-#             "Specified language code does not exist in ISO 639-2 " .
-#             "(terminology)";
+#             sprintf 'Validation failed for code failed with value (%s) '
+#                   . 'because specified language code does not exist '
+#                   . 'in ISO 639-2 (terminology)',
+#                 defined $_ ? $_ : q{};
 #         };
 # 
 # coerce TerminologyLanguage,
@@ -141,8 +145,10 @@ subtype LanguageName,
             exists $name{$_};
         },
         message {
-            "Validation failed for name failed with value ($_) because: " .
-            "Specified language name does not exist in ISO 639";
+            sprintf 'Validation failed for name failed with value (%s) '
+                  . 'because specified language name does not exist '
+                  . 'in ISO 639',
+                defined $_ ? $_ : q{};
         };
 
 coerce LanguageName,
@@ -154,6 +160,17 @@ coerce LanguageName,
             #   to use it in exception message.
             return code2language( language2code($_) ) || $_;
         };
+
+
+# ****************************************************************
+# optionally add Getopt option type
+# ****************************************************************
+
+eval { require MooseX::Getopt; };
+if (!$@) {
+    MooseX::Getopt::OptionTypeMap->add_option_type_to_map( $_, '=s', )
+        for (LanguageCode, Alpha2Language, LanguageName);
+}
 
 
 # ****************************************************************
@@ -202,8 +219,9 @@ MooseX::Types::Locale::Language - Locale::Language related constraints and coerc
 
 =head1 DESCRIPTION
 
-This module packages several L<Moose::Util::TypeConstraints> with coercions,
-designed to work with the values of L<Locale::Language>.
+This module packages several
+L<Moose::Util::TypeConstraints|Moose::Util::TypeConstraints> with coercions,
+designed to work with the values of L<Locale::Language|Locale::Language>.
 
 =head1 CONSTRAINTS AND COERCIONS
 
@@ -228,15 +246,43 @@ For example, C<'JAPANESE'> will convert to C<'Japanese'>.
 
 =back
 
+=head1 NOTE
+
+=head2 Code conversion is not supported
+
+These coercions is not support code conversion.
+For example, from C<Alpha2Language> to C<LanguageName>.
+
+    has language
+        => ( is => 'rw', isa => LanguageName, coerce => 1 );
+
+    ...
+
+    $foo->language('en');   # does not convert to 'English'
+
+If you want conversion, could you implement an individual language class
+with several attributes?
+
+See C</examples/complex.pl> in the distribution for more details.
+
+=head2 The type mapping of L<MooseX::Getopt|MooseX::Getopt>
+
+This module provides the optional type mapping of
+L<MooseX::Getopt|MooseX::Getopt>
+when L<MooseX::Getopt|MooseX::Getopt> was installed.
+
+C<LanguageCode>, C<Alpha2Language> and C<LanguageName> are
+C<String> (C<"=s">) type.
+
 =head1 SEE ALSO
 
 =over 4
 
-=item * L<Locale::Language>
+=item * L<Locale::Language|Locale::Language>
 
-=item * L<MooseX::Types::Locale::Language::Fast>
+=item * L<MooseX::Types::Locale::Language::Fast|MooseX::Types::Locale::Language::Fast>
 
-=item * L<MooseX::Types::Locale::Country>
+=item * L<MooseX::Types::Locale::Country|MooseX::Types::Locale::Country>
 
 =back
 
@@ -248,7 +294,7 @@ None reported.
 
 =over 4
 
-=item * I will send patch on L<Locale::Language> to NEILB,
+=item * I will send patch on L<Locale::Language|Locale::Language> to NEILB,
         to solve RT #11730. (The patch supports ISO 639-2 alpha-3
         bibliographic/terminology codes).
         cf. L<http://rt.cpan.org/Public/Bug/Display.html?id=11730>
@@ -256,8 +302,16 @@ None reported.
 =item * By doing this, this module will support ISO 639-2 alpha-3
         bibliographic/terminology codes.
 
-=item * As necessary, L<Locale::Language> and this module may support
-        ISO 639-3 alpha-3 codes (comprehensive coverage of language).
+=item * As necessary, L<Locale::Language|Locale::Language>
+        and this module may support ISO 639-3 alpha-3 codes
+        (comprehensive coverage of language).
+
+=item * I may add grammatical aliases of constraints/coercions.
+        For example, C<LanguageAsAlpha2> as existent C<Alpha2Language>.
+
+=item * I may add namespased types.
+        For example, C<'Locale::Language::Alpha2'> as export type
+        C<Alpha2Language>.
 
 =back
 
@@ -270,7 +324,7 @@ No bugs have been reported.
 Please report any found bugs, feature requests, and ideas for improvements
 to C<bug-moosex-types-locale-language at rt.cpan.org>,
 or through the web interface
-at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooseX-Types-Locale-Language>.
+at L<http://rt.cpan.org/Public/Bug/Report.html?Queue=MooseX-Types-Locale-Language>.
 I will be notified, and then you'll automatically be notified of progress
 on your bugs/requests as I make changes.
 
@@ -291,7 +345,7 @@ You can also look for information at:
 
 =item RT: CPAN's request tracker
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MooseX-Types-Locale-Language>
+L<http://rt.cpan.org/Public/Bug/Report.html?Queue=MooseX-Types-Locale-Language>
 
 =item AnnoCPAN: Annotated CPAN documentation
 
@@ -303,7 +357,7 @@ L<http://search.cpan.org/dist/MooseX-Types-Locale-Language>
 
 =item CPAN Ratings
 
-L<http://cpanratings.perl.org/d/MooseX-Types-Locale-Language>
+L<http://cpanratings.perl.org/dist/MooseX-Types-Locale-Language>
 
 =back
 
@@ -317,20 +371,23 @@ L<git://github.com/gardejo/p5-moosex-types-locale-language.git>.
 
 =over 4
 
-=item MORIYA Masaki ("Gardejo")
+=item MORIYA Masaki (a.k.a. Gardejo)
 
-C<< <moriya at ermitejo dot com> >>,
+C<< <moriya at cpan dot org> >>,
 L<http://ttt.ermitejo.com/>
 
 =back
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2009 by MORIYA Masaki ("Gardejo"),
-L<http://ttt.ermitejo.com>.
+Copyright (c) 2009 by MORIYA Masaki (a.k.a. Gardejo),
+L<http://ttt.ermitejo.com/>.
 
 This library is free software;
 you can redistribute it and/or modify it under the same terms as Perl itself.
-See L<perlgpl> and L<perlartistic>.
+See L<perlgpl|perlgpl> and L<perlartistic|perlartistic>.
+
+The full text of the license can be found in the F<LICENSE> file
+included with this distribution.
 
 =cut
