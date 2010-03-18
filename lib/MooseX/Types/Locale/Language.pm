@@ -39,7 +39,7 @@ use namespace::clean;
 # public class variable(s)
 # ****************************************************************
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 
 # ****************************************************************
@@ -190,6 +190,12 @@ __END__
 =head1 NAME
 
 MooseX::Types::Locale::Language - Locale::Language related constraints and coercions for Moose
+
+=head1 VERSION
+
+This document describes
+L<MooseX::Types::Locale::Language|MooseX::Types::Locale::Language>
+version C<0.05>.
 
 =head1 SYNOPSIS
 
@@ -377,17 +383,16 @@ L<git://github.com/gardejo/p5-moosex-types-locale-language.git>.
 
 =over 4
 
-=item MORIYA Masaki (a.k.a. Gardejo)
+=item MORIYA Masaki, alias Gardejo
 
 C<< <moriya at cpan dot org> >>,
-L<http://ttt.ermitejo.com/>
+L<http://gardejo.org/>
 
 =back
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2009-2010 by MORIYA Masaki (a.k.a. Gardejo),
-L<http://ttt.ermitejo.com/>.
+Copyright (c) 2009-2010 MORIYA Masaki, alias Gardejo
 
 This library is free software;
 you can redistribute it and/or modify it under the same terms as Perl itself.
