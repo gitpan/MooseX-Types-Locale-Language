@@ -35,4 +35,4 @@ resources:
   homepage: http://github.com/gardejo/p5-moosex-types-locale-language
   license: http://dev.perl.org/licenses/
   repository: git://github.com/gardejo/p5-moosex-types-locale-language.git
-version: 0.05
+version: 0.06
